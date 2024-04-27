@@ -63,7 +63,7 @@ make install
 
 **3. That's it.**
 
-Open [http://localhost:8080](http://localhost:8080) url in your browser.
+Open [http://localhost:3000](http://localhost:3000) url in your browser.
 
 _If you see the 502 error page, just wait a bit when `npm install && npm run dev` process will be finished (Check the status with the command `docker-compose logs client`)_
 
@@ -105,9 +105,7 @@ docker-compose restart client
 
 ## Basic usage
 
-Your base url is `http://localhost:8080`. All requests to Laravel API must be sent using to the url starting with `/api` prefix. Nginx server will proxy all requests with `/api` prefix to the node static server which serves the Next.
-
-There is also available [http://localhost:8081](http://localhost:8081) url which is handled by Laravel and should be used for testing purposes only.
+Your base url is `http://localhost:8080`. All requests to Laravel API must be sent using to the url starting with `/api` prefix. Nginx server will pass all requests with `/api` prefix to the node static server which serves the Next.
 
 You **don't** need to configure the api to allow cross origin requests because all requests are proxied through the Nginx.
 
@@ -138,23 +136,20 @@ docker-compose down
 
 ## Next
 
-Your application is available at the [http://localhost:8080](http://localhost:8080) url.
+Your application is available at the [http://localhost:3000](http://localhost:3000) url.
 
 Take a look at `client/.env` file. There are two variables:
 
 ```
-API_URL=http://nginx:80
-API_URL_BROWSER=http://localhost:8080
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
 ```
-
-`API_URL` is the url where Next sends requests during SSR process and is equal to the Nginx url inside the docker network. Take a look at the [image above](#basic-usage).
 
 `API_URL_BROWSER` is the base application url for browsers.
 
 Example of API request:
 
 ```
-this.$axios.post('/api/register', {
+axios.post('/api/register', {
     email: this.email,
     password: this.password
 });
@@ -166,7 +161,7 @@ If you update or install node dependencies, you should restart the Next process,
 
 ```
 # Make command
-make rn
+make rc
 
 # Full command
 docker-compose restart client
@@ -175,8 +170,6 @@ docker-compose restart client
 ## Laravel
 
 Laravel API is available at the [http://localhost:8080/api](http://localhost:8080/api) url.
-
-There is also available [http://localhost:8081](http://localhost:8081) url which is handled by Laravel and should be used for testing purposes only.
 
 #### Artisan
 
