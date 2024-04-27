@@ -1,7 +1,7 @@
 # Image
-FROM node:alpine
+FROM node:20-alpine
 
-RUN apk add g++ make python3
+# RUN apk add g++ make python3
 
 # Set up work directory
 WORKDIR /var/www/client
