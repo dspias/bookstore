@@ -193,7 +193,7 @@ autoload:
 	docker-compose exec php composer dump-autoload
 
 # Install the environment
-install: build env-api env-client composer-install key storage permissions migrate rc
+install: build env-api env-client composer-install key storage permissions migrate db-seed rc
 
 
 #-----------------------------------------------------------
