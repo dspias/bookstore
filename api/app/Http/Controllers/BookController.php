@@ -4,15 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use OpenApi\Annotations as OA;
 
 class BookController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
+    * @OA\Info(
+    *      version="1.0.0",
+    *      title="L5 OpenApi",
+    *      description="L5 Swagger OpenApi description"
+    * )
+    * @OA\Get(
+    *     path="/api/books",
+    *     summary="Get a list of books",
+    *     tags={"Books"},
+    *     @OA\Response(response=200, description="Successful operation"),
+    *     @OA\Response(response=400, description="Invalid request")
+    * )
+    */
     public function index()
     {
-        //
+        return response()->json(Book::all());
     }
 
     /**
