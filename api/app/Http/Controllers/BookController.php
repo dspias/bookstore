@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Http\Resources\BookResource;
 use OpenApi\Annotations as OA;
 
 class BookController extends Controller
@@ -11,9 +12,10 @@ class BookController extends Controller
     /**
     * @OA\Info(
     *      version="1.0.0",
-    *      title="L5 OpenApi",
-    *      description="L5 Swagger OpenApi description"
+    *      title="Bookstore",
+    *      description="Bookstore api description"
     * )
+    *
     * @OA\Get(
     *     path="/api/books",
     *     summary="Get a list of books",
@@ -22,56 +24,35 @@ class BookController extends Controller
     *     @OA\Response(response=400, description="Invalid request")
     * )
     */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Book::all());
+        // $searchingFor = $request->input('q');
+        
+        $books = Book::with(['tags', 'writers'])->paginate();
+        return BookResource::collection($books);
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
+    * @OA\Get(
+    *     path="/api/books/{book}",
+    *     summary="Get details of a book",
+    *     tags={"Books"},
+    *     @OA\Parameter(
+    *         name="book",
+    *         in="path",
+    *         required=true,
+    *         description="Unique identifier of the book",
+    *         @OA\Schema(
+    *             type="integer"
+    *         )
+    *     ),
+    *     @OA\Response(response=200, description="Successful operation"),
+    *     @OA\Response(response=400, description="Invalid request")
+    * )
+    */
     public function show(Book $book)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Book $book)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Book $book)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Book $book)
-    {
-        //
+        $book->load(['tags', 'writers']);
+        return BookResource::make($book);
     }
 }

@@ -32,15 +32,17 @@ class BookFactory extends Factory
         return $this->afterCreating(function (Book $book) {
             $items = function (int $limit, int $range): array {
                 $list = [];
-                for($i = 1; $i <= $limit; $i++) {
-                    $list[] = rand(1, $range);
+                while (count($list) < $limit) {
+                    $randomNumber = rand(1, $range);
+                    if (!in_array($randomNumber, $list)) {
+                        $list[] = $randomNumber;
+                    }
                 }
-
                 return $list;
             };
 
             $book->tags()->attach($items(rand(2, 4), 4));
-            $book->writers()->attach($items(rand(1, 3), 10));
+            $book->writers()->attach($items(rand(1, 3), 20));
         });
     }
 

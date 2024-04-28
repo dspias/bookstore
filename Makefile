@@ -192,8 +192,12 @@ storage:
 autoload:
 	docker-compose exec php composer dump-autoload
 
+# Swagger generate command
+swg-generate:
+	docker-compose exec php php artisan l5-swagger:generate
+
 # Install the environment
-install: build env-api env-client composer-install key storage permissions migrate db-seed rc
+install: build env-api env-client composer-install key storage permissions migrate db-seed swg-generate rc
 
 
 #-----------------------------------------------------------

@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "L5 OpenApi",
-        "description": "L5 Swagger OpenApi description",
+        "title": "Bookstore",
+        "description": "Bookstore api description",
         "version": "1.0.0"
     },
     "paths": {
@@ -13,6 +13,34 @@
                 ],
                 "summary": "Get a list of books",
                 "operationId": "a9d13283dfab262e97af3c914d51b7a8",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/api/books/{book}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get details of a book",
+                "operationId": "d8bbccd69b954f8a92bd6c3292b15842",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "Unique identifier of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
