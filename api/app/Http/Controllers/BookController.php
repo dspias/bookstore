@@ -28,7 +28,7 @@ class BookController extends Controller
     {
         // $searchingFor = $request->input('q');
         
-        $books = Book::with(['tags', 'writers'])->paginate();
+        $books = Book::with(['tags', 'writers'])->paginate(30);
         return BookResource::collection($books);
     }
 

@@ -50,6 +50,40 @@
                     }
                 }
             }
+        },
+        "/api/Tags": {
+            "get": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Get a list of Tags",
+                "operationId": "0bd27154b15b0194535f1188ddee1f63",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/api/Writers": {
+            "get": {
+                "tags": [
+                    "Writers"
+                ],
+                "summary": "Get a list of Writers",
+                "operationId": "6883078aa29081638045fbb2da7fe15d",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
         }
     }
 }

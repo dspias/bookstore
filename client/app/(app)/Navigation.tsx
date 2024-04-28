@@ -1,7 +1,7 @@
 import { Logo } from "@/components/logo";
 import Dropdown from "@/components/Dropdown";
 import Link from "next/link";
-import NavLink from "@/components/NavLink";
+import { NavLink } from "@/components/nav-link";
 import ResponsiveNavLink, {
   ResponsiveNavButton,
 } from "@/components/ResponsiveNavLink";
@@ -9,8 +9,9 @@ import { DropdownButton } from "@/components/DropdownLink";
 import { useAuth } from "@/hooks/auth";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { User } from "@/schema";
 
-const Navigation = ({ user }) => {
+const Navigation = ({ user }: { user?: User }) => {
   const { logout } = useAuth();
 
   const [open, setOpen] = useState(false);

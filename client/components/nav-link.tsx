@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const NavLink = ({
+export const NavLink = ({
   active = false,
   children,
   href,
@@ -22,5 +22,3 @@ const NavLink = ({
     {children}
   </Link>
 );
-
-export default NavLink;
