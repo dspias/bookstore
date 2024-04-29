@@ -36,6 +36,7 @@ export const useOrder = () => {
       .catch((error) => {
         if (error?.response?.status !== 422) throw error;
 
+        toast("Something went wrong!");
         setErrors(error.response.data.errors);
       });
   };
@@ -47,7 +48,7 @@ export const useOrder = () => {
       .post(`/api/orders/cancel/${orderId}`, props)
       .then((res) => {
         toast("Order canceled !");
-        router.refresh(); 
+        router.refresh();
       })
       .catch((error) => {
         if (error?.response?.status !== 422) throw error;

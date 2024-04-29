@@ -21,7 +21,8 @@ class OrderController extends Controller
     */
     public function index()
     {
-        $orders = Order::whereUser_id(auth()->user()->id)
+        $orders = Order::with(['book'])
+            ->whereUser_id(auth()->user()->id)
             ->orderBy('id', 'desc')
             ->paginate(20);
             
@@ -87,7 +88,7 @@ class OrderController extends Controller
         $points = $book->points * $request->quantity;
         
         if ($user->points < $points) {
-            return response()->json(["status" => 422, "message" => "You don't have enough points"]);
+            return response()->json(["status" => 422, "message" => "You don't have enough points"], 422);
         }
 
         $order = Order::create([

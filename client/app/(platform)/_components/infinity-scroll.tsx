@@ -38,8 +38,8 @@ export const InfinityScroll = ({ books }: BookProps) => {
 
   const filteredItems = (items: Array<Book>) => {
     return items.filter((item: Book) => {
-      const tagIds = item.tags.map(tag => tag.id);
-      const writerIds = item.writers.map(writer => writer.id);
+      const tagIds = item?.tags?.map(tag => tag.id) || [];
+      const writerIds = item?.writers?.map(writer => writer.id) || [];
       const hasTag = qtag ? tagIds.includes(Number(qtag)) : true;
       const hasWriter = qwriter ? writerIds.includes(Number(qwriter)) : true;
       return (hasTag && hasWriter);
