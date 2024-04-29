@@ -1,14 +1,31 @@
+"use client";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tag, Writer } from "@/schema";
-import Link from "next/link";
-import React from "react";
+import React, { useCallback } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTag } from "@/hooks/use-tag";
 import { useWriter } from "@/hooks/use-writer";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export const BooksAside = () => {
   const { tags } = useTag();
   const { writers } = useWriter();
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   if (!tags || !writers) {
     return (
@@ -59,13 +76,23 @@ export const BooksAside = () => {
                 </h4>
                 <div className="grid grid-flow-row auto-rows-max text-sm">
                   {tags.map((tag: Tag) => (
-                    <Link
+                    <p
                       key={tag.id}
-                      className="group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline text-muted-foreground capitalize"
-                      href="/docs"
+                      onClick={() => {
+                        router.push(
+                          pathname +
+                            "?" +
+                            createQueryString("tag", tag.id.toString())
+                        );
+                      }}
+                      className={cn(
+                        "group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline text-muted-foreground capitalize cursor-pointer",
+                        searchParams.get("tag") === tag.id.toString() &&
+                          "text-green-500"
+                      )}
                     >
                       {tag.name}
-                    </Link>
+                    </p>
                   ))}
                 </div>
               </div>
@@ -75,13 +102,23 @@ export const BooksAside = () => {
                 </h4>
                 <div className="grid grid-flow-row auto-rows-max text-sm">
                   {writers.map((writer: Writer) => (
-                    <Link
+                    <p
                       key={writer.id}
-                      className="group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline text-muted-foreground capitalize"
-                      href="/docs"
+                      onClick={() => {
+                        router.push(
+                          pathname +
+                            "?" +
+                            createQueryString("writer", writer.id.toString())
+                        );
+                      }}
+                      className={cn(
+                        "group flex w-full items-center rounded-md border border-transparent px-2 py-1 hover:underline text-muted-foreground capitalize cursor-pointer",
+                        searchParams.get("writer") === writer.id.toString() &&
+                          "text-green-500"
+                      )}
                     >
                       {writer.name}
-                    </Link>
+                    </p>
                   ))}
                 </div>
               </div>

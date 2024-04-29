@@ -65,6 +65,8 @@ make install
 
 Open [http://localhost:3000](http://localhost:3000) url in your browser.
 
+Documentation at the [http://localhost:8080/api/documentation](http://localhost:8080/api/documentation) url.
+
 _If you see the 502 error page, just wait a bit when `npm install && npm run dev` process will be finished (Check the status with the command `docker-compose logs client`)_
 
 #### Manual installation
@@ -137,7 +139,6 @@ docker-compose down
 ## Next
 
 Your application is available at the [http://localhost:3000](http://localhost:3000) url.
-Your application documentation at the [http://localhost:8080/api/documentation](http://localhost:8080/api/documentation) url.
 
 Take a look at `client/.env` file. There are two variables:
 
@@ -263,6 +264,9 @@ artisan make:model Post
 ## Database
 
 If you want to connect to PostgreSQL database from external tool, for example _Sequel Pro_ or _Navicat_, use the following parameters
+
+The following image demonstrates Database Schema.
+![Schema](db_schema.png)
 
 ```
 HOST: localhost
