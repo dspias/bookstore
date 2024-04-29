@@ -13,12 +13,9 @@ services:
       - ./:/var/www
       - ./.docker/nginx/logs:/var/log/nginx
     ports:
-      # Next port
-      - 8080:80
       # Laravel port
-      - 8081:81
+      - 8080:80
     links:
-      - client
       - php
 
   # PHP FastCGI Process Manager container
@@ -84,6 +81,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./client:/var/www/client
+    ports:
+    - 3000:3000
 
 ######### Volumes ###################################
 

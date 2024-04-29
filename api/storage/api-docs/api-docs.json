@@ -1,0 +1,261 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Bookstore",
+        "description": "Bookstore api description",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get a list of books",
+                "operationId": "a9d13283dfab262e97af3c914d51b7a8",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/api/books/{book}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get details of a book",
+                "operationId": "d8bbccd69b954f8a92bd6c3292b15842",
+                "parameters": [
+                    {
+                        "name": "book",
+                        "in": "path",
+                        "description": "Unique identifier of the book",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/api/orders": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get a list of orders for the auth user",
+                "operationId": "2cd7e03021e72d9d799c12dfe179c865",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Store an order for the authenticated user",
+                "operationId": "d690d6834318e9b064df441e854de8b9",
+                "requestBody": {
+                    "description": "Order details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "book_id",
+                                    "quantity"
+                                ],
+                                "properties": {
+                                    "book_id": {
+                                        "description": "ID of the book",
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "quantity": {
+                                        "description": "Quantity of books",
+                                        "type": "integer",
+                                        "example": "2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "description": "Order ID",
+                                            "type": "integer"
+                                        },
+                                        "user_id": {
+                                            "description": "User ID",
+                                            "type": "integer"
+                                        },
+                                        "book_id": {
+                                            "description": "Book ID",
+                                            "type": "integer"
+                                        },
+                                        "oid": {
+                                            "description": "Order Identifier",
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "description": "Order status",
+                                            "type": "string"
+                                        },
+                                        "quantity": {
+                                            "description": "Quantity of books",
+                                            "type": "integer"
+                                        },
+                                        "points": {
+                                            "description": "Points deducted",
+                                            "type": "integer"
+                                        },
+                                        "created_at": {
+                                            "description": "Order creation timestamp",
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "description": "Order update timestamp",
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "description": "Error message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "description": "HTTP status code",
+                                            "type": "integer"
+                                        },
+                                        "message": {
+                                            "description": "Error message",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/orders/cancel/{order}": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get a list of orders for the user",
+                "operationId": "fb1d94a72b67038e8db0cc2ccf556c5c",
+                "parameters": [
+                    {
+                        "name": "order",
+                        "in": "path",
+                        "description": "Unique identifier of the order",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/api/Tags": {
+            "get": {
+                "tags": [
+                    "Tags"
+                ],
+                "summary": "Get a list of Tags",
+                "operationId": "0bd27154b15b0194535f1188ddee1f63",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        },
+        "/api/Writers": {
+            "get": {
+                "tags": [
+                    "Writers"
+                ],
+                "summary": "Get a list of Writers",
+                "operationId": "6883078aa29081638045fbb2da7fe15d",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid request"
+                    }
+                }
+            }
+        }
+    }
+}

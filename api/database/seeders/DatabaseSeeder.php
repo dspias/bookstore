@@ -3,6 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Tag;
+use App\Models\Writer;
+use App\Models\Book;
+use App\Models\Order;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +18,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Insert 4 tags
+        Tag::factory()
+            ->count(4)
+            ->sequence(
+                ['name' => 'fiction'],
+                ['name' => 'non-fiction'],
+                ['name' => 'science'],
+                ['name' => 'essay'],
+            )
+            ->create();
+        
+        // Insert 40 writers
+        Writer::factory()->count(20)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Insert 400 books
+        Book::factory()->count(400)->create();
+
+        User::factory(2)->create();
+
+        Order::factory(400)->create();
     }
 }
