@@ -20,7 +20,7 @@ const Page = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const submitForm = (event) => {
+  const submitForm = (event: any) => {
     event.preventDefault();
 
     register({
@@ -43,7 +43,7 @@ const Page = () => {
           type="text"
           value={name}
           className="block mt-1 w-full"
-          onChange={(event) => setName(event.target.value)}
+          onChange={(event: any) => setName(event.target.value)}
           required
           autoFocus
         />

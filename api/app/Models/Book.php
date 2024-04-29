@@ -26,4 +26,14 @@ class Book extends Model
     {
         return $this->belongsToMany(Writer::class);
     }
+
+
+    /**
+     * Get all orders under the book
+     * A Many to Many relationships
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

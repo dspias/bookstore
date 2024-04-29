@@ -8,7 +8,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LogOut, User } from "lucide-react";
+import { ListOrdered, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -21,7 +21,12 @@ export const UserButton = () => {
       {user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button size="sm" variant="outline" asChild className="cursor-pointer">
+            <Button
+              size="sm"
+              variant="outline"
+              asChild
+              className="cursor-pointer"
+            >
               <span>
                 {user?.name}
                 <User className="ml-2 h-4 w-4" />
@@ -29,10 +34,15 @@ export const UserButton = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
+            <DropdownMenuItem className="cursor-pointer">
+              <Link href="/orders" className="flex">
+                <ListOrdered className="mr-2 h-4 w-4" />
+                <span>My orders</span>
+              </Link>
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={logout} className="cursor-pointer">
               <LogOut className="mr-2 h-4 w-4" />
               <span>Log out</span>
-              <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

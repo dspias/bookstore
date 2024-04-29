@@ -9,7 +9,9 @@ const PlatformLayout = ({ children }: { children: React.ReactNode }) => {
         <Toaster />
         <div className="h-full">
           <Navbar />
-          {children}
+          <div className="flex-1 pt-24">
+            <div className="container flex-1 items-start">{children}</div>
+          </div>
         </div>
       </QueryProvider>
     </>
