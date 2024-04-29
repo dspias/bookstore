@@ -105,7 +105,7 @@ docker-compose restart client
 
 ## Basic usage
 
-Your base url is `http://localhost:8080`. All requests to Laravel API must be sent using to the url starting with `/api` prefix. Nginx server will pass all requests with `/api` prefix to the node static server which serves the Next.
+Your api base url is `http://localhost:8080`. All requests to Laravel API must be sent using to the url starting with `/api` prefix. Nginx server will pass all requests with `/api` prefix to the node static server which serves the Next.
 
 You **don't** need to configure the api to allow cross origin requests because all requests are proxied through the Nginx.
 
@@ -137,6 +137,7 @@ docker-compose down
 ## Next
 
 Your application is available at the [http://localhost:3000](http://localhost:3000) url.
+Your application documentation at the [http://localhost:8080/api/documentation](http://localhost:8080/api/documentation) url.
 
 Take a look at `client/.env` file. There are two variables:
 
