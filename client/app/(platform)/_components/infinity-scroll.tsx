@@ -9,6 +9,7 @@ import type { GetServerSideProps } from "next";
 import { axios } from "@/lib/axios";
 import { Book } from "@/schema";
 import { BookItem } from "./book-item";
+import { useSearchParams } from "next/navigation";
 
 interface BookProps {
   books?: {
@@ -30,6 +31,20 @@ export const InfinityScroll = ({ books }: BookProps) => {
   const seed = useUIDSeed();
 
   const [tagIds, setTagIds] = useState([]);
+
+  const searchParams = useSearchParams();
+  const qtag = searchParams.get("tag");
+  const qwriter = searchParams.get("writer");
+
+  const filteredItems = (items: Array<Book>) => {
+    return items.filter((item: Book) => {
+      const tagIds = item.tags.map(tag => tag.id);
+      const writerIds = item.writers.map(writer => writer.id);
+      const hasTag = qtag ? tagIds.includes(Number(qtag)) : true;
+      const hasWriter = qwriter ? writerIds.includes(Number(qwriter)) : true;
+      return (hasTag && hasWriter);
+    });
+  };
 
   const {
     data,
@@ -64,7 +79,7 @@ export const InfinityScroll = ({ books }: BookProps) => {
         {isSuccess &&
           data?.pages?.map((page) => (
             <Fragment key={seed(page)}>
-              {page.data.map((book: Book) => (
+              {filteredItems(page.data).map((book: Book) => (
                 <BookItem key={book.id} book={book} />
               ))}
             </Fragment>
