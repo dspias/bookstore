@@ -265,6 +265,9 @@ artisan make:model Post
 
 If you want to connect to PostgreSQL database from external tool, for example _Sequel Pro_ or _Navicat_, use the following parameters
 
+The following image demonstrates Database Schema.
+![Schema](db_schema.png)
+
 ```
 HOST: localhost
 PORT: 54321
