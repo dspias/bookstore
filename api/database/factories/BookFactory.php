@@ -20,7 +20,7 @@ class BookFactory extends Factory
     {
         return [
             'title' => fake()->words(3, true),
-            'points' => rand(1, 100),
+            'points' => rand(1, 50),
         ];
     }
 

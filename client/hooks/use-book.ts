@@ -1,44 +1,32 @@
 import useSWR from "swr";
 import { axios } from "@/lib/axios";
 
-interface UserProps {
-  setErrors: (value: Array<any>) => void;
-  setBooks: (value: any) => void;
-}
-
-export const useBook = () => {
-  // const {
-  //   data: books,
-  //   error,
-  //   mutate,
-  // } = useSWR("/api/books", () =>
-  //   axios
-  //     .get("/api/books")
-  //     .then((res) => res.data)
-  //     .then((res) => res.data)
-  //     .catch((error) => {
-  //       if (error.response.status !== 409) throw error;
-  //     })
-  // );
-
-  const csrf = () => axios.get("/sanctum/csrf-cookie");
-
-  const books = async ({ setErrors, setBooks, ...props }: UserProps) => {
-    // await csrf();
-
-    setErrors([]);
-    setBooks([]);
-
+export const useBook = ({ bookId }: { bookId?: number }) => {
+  const {
+    data: books,
+  } = useSWR("/api/books", () =>
     axios
-      .post("/api/books", props)
-      .then((res) => setBooks(res.data))
+      .get("/api/books")
+      .then((res) => res.data)
+      .then((res) => res.data)
       .catch((error) => {
-        if (error.response.status !== 422) throw error;
-        setErrors(error.response.data.errors);
-      });
-  };
+        if (error.response.status !== 409) throw error;
+      })
+  );
+  const {
+    data: book,
+  } = useSWR(`/api/books/${bookId}`, () =>
+    axios
+      .get(`/api/books/${bookId}`)
+      .then((res) => res.data)
+      .then((res) => res.data)
+      .catch((error) => {
+        if (error.response.status !== 409) throw error;
+      })
+  );
 
   return {
     books,
+    book,
   };
 };

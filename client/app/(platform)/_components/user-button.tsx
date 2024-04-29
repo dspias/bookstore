@@ -21,7 +21,7 @@ export const UserButton = () => {
       {user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button size="sm" variant="outline" asChild>
+            <Button size="sm" variant="outline" asChild className="cursor-pointer">
               <span>
                 {user?.name}
                 <User className="ml-2 h-4 w-4" />
@@ -29,7 +29,7 @@ export const UserButton = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
-            <DropdownMenuItem onClick={logout}>
+            <DropdownMenuItem onClick={logout} className="cursor-pointer">
               <LogOut className="mr-2 h-4 w-4" />
               <span>Log out</span>
               <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
