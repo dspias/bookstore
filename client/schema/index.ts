@@ -25,3 +25,15 @@ export type Book = {
   writers: Array<Writer>;
   tags: Array<Tag>;
 };
+
+export type Order = {
+  id: number;
+  oid: string;
+  status: string;
+  quantity: number;
+  points: number;
+  book: Book;
+  tags: Array<Tag>;
+  createdAt: Date;
+  caneledAt?: Date;
+};

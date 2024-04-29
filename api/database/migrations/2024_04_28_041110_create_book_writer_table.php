@@ -4,6 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\Writer;
+use App\Models\Book;
+
 return new class extends Migration
 {
     /**
@@ -13,13 +16,11 @@ return new class extends Migration
     {
         Schema::create('book_writer', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBiginteger('writer_id');
-            $table->unsignedBiginteger('book_id');
+            $table->foreignIdFor(Writer::class);
+            $table->foreign('writer_id')->references('id')->on('writers');
 
-            $table->foreign('writer_id')->references('id')
-                ->on('writers')->onDelete('cascade');
-            $table->foreign('book_id')->references('id')
-                ->on('books')->onDelete('cascade');
+            $table->foreignIdFor(Book::class);
+            $table->foreign('book_id')->references('id')->on('books');
         });
     }
 
