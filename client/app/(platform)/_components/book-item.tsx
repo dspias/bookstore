@@ -31,7 +31,7 @@ export const BookItem = ({
             </h3>
             <p className="mt-1 text-sm text-gray-500">
               <b>Writers: </b>
-              {book.writers.map((writer, index) => (
+              {book.writers && book.writers.map((writer, index) => (
                 <React.Fragment key={writer.id}>
                   {writer.name}
                   {index !== book.writers.length - 1 && <>{", "}</>}
@@ -39,7 +39,7 @@ export const BookItem = ({
               ))}
             </p>
             <div className="mt-1 text-sm text-gray-500">
-              {book.tags.map((tag) => (
+              {book.tags && book.tags.map((tag) => (
                 <Badge key={tag.id} variant="secondary" className="mr-1 mb-1">
                   {tag.name}
                 </Badge>

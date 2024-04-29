@@ -35,8 +35,8 @@ class DatabaseSeeder extends Seeder
         // Insert 400 books
         Book::factory()->count(400)->create();
 
-        User::factory(2)->create();
+        // User::factory(2)->create();
 
-        Order::factory(400)->create();
+        // Order::factory(400)->create();
     }
 }

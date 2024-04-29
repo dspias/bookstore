@@ -26,11 +26,11 @@ export const OrderItem = ({ order }: { order: Order }) => {
       >
         {order.oid}
       </th>
-      <td className="px-6 py-4 capitalize">{order.book.title}</td>
+      <td className="px-6 py-4 capitalize">{order?.book?.title}</td>
       <td className="px-6 py-4">{order.quantity}</td>
       <td className="px-6 py-4">{order.points}</td>
       <td className="px-6 py-4">
-        {format(new Date(order.createdAt), "MMM d, yyyy")}
+        {order.createdAt && format(new Date(order.createdAt), "MMM d, yyyy")}
       </td>
       <td className="px-6 py-4">
         {order.status === "canceled" && (
@@ -83,6 +83,12 @@ OrderItem.Skeleton = function SkeletonBookItem() {
         scope="row"
         className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
       >
+        <Skeleton className="h-10 w-full" />
+      </th>
+      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+        <Skeleton className="h-10 w-full" />
+      </th>
+      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
         <Skeleton className="h-10 w-full" />
       </th>
       <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
