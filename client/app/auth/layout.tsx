@@ -1,12 +1,17 @@
+import { Toaster } from "sonner";
+
 interface AuthLayoutProps {
   children: React.ReactNode;
 }
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
-    <div className="h-full flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-sky-700">
-      {children}
-    </div>
+    <>
+      <Toaster richColors closeButton position="top-right" />
+      <div className="h-full flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-sky-700">
+        {children}
+      </div>
+    </>
   );
 };
 
